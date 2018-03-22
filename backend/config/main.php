@@ -59,5 +59,6 @@ return [
         ],
         */
     ],
+    'language'=>'zh-cn',
     'params' => $params,
 ];

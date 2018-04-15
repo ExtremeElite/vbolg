@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
-    'defaultRoute'=>'site',
+    'defaultRoute'=>'default',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf',
@@ -58,6 +58,11 @@ return [
             ],
         ],
         */
+    ],
+    'aliases'=>[
+        '@image'=>'http://image.backend.com',
+        '@localpath'=>'C:\coder\image',
+        '@domain'=>'backend.com'
     ],
     'language'=>'zh-cn',
     'params' => $params,

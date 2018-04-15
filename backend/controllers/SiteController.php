@@ -16,55 +16,13 @@ class SiteController extends BaseController
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'user'=>'admin',
-                'rules' => [
-                    [
-                        'actions' => ['login','error','test'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout','index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
+    protected $login_actions=['logout','index'];
+    protected $except_actions=['login','error'];
     /**
      * Displays homepage.
      *
      * @return string
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
     public function actionTest(){
         $str=CommonTools::createStr(10);
         echo $str;
@@ -79,7 +37,7 @@ class SiteController extends BaseController
     {
         $this->layout='login';
         if (!Yii::$app->admin->isGuest){
-            return $this->redirect(['site/index']);
+            return $this->goHome();
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())&& $model->login()) {
@@ -88,7 +46,8 @@ class SiteController extends BaseController
             $_admin->last_time=time();
             $_admin->ip=Yii::$app->request->userIP;
             $_admin->update();
-            return $this->redirect(['site/index']);
+            return $this->goHome();
+            #return $this->redirect(['defualt/index']);
         } else {
             return $this->render('login',[
                 'model' => $model,
@@ -106,5 +65,8 @@ class SiteController extends BaseController
         Yii::$app->admin->logout();
 
         return $this->goHome();
+    }
+    public function actionError(){
+        return '404';
     }
 }

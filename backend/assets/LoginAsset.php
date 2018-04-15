@@ -9,7 +9,7 @@
 namespace backend\assets;
 
 use yii\web\AssetBundle;
-
+use common\components\CommonTools;
 /**
  * Main backend application asset bundle.
  */
@@ -17,9 +17,20 @@ class LoginAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+    public function init()
+    {
+        parent::init();
+        foreach ($this->css as &$c){
+            $c=$c.CommonTools::versionCSS();
+        }
+        foreach ($this->js as &$j){
+            $j=$j.CommonTools::versionJs();
+        }
+    }
+
     public $css = [
         'css/site.css',
-        'css/login.css'
+        'css/login.css',
     ];
     public $js = [
     ];

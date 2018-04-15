@@ -22,6 +22,13 @@ LoginAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title>登录</title>
     <?php $this->head() ?>
+    <script>
+        var oParent=window.parent.document.getElementById('main');
+        if(oParent){
+            parent.location.reload();
+        }
+
+    </script>
 </head>
 <body class="login-bg">
 <?php $this->beginBody() ?>

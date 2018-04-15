@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uname` varchar(10) NOT NULL DEFAULT '' COMMENT '登陆名',
-  `nikc_name` varchar(20) NOT NULL DEFAULT '' COMMENT '昵称',
+  `nick_name` varchar(20) NOT NULL DEFAULT '' COMMENT '昵称',
   `password` char(32) NOT NULL DEFAULT '' COMMENT '密码',
   `status` int(2) NOT NULL DEFAULT '0' COMMENT '管理员状态0:不允许登陆;1：允许登陆',
   `create_time` int(11) NOT NULL DEFAULT '0',
